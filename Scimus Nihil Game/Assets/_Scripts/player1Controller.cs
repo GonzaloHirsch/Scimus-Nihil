@@ -5,12 +5,13 @@ using UnityEngine;
 public class player1Controller : MonoBehaviour {
 
     public float playerSpeed = 10f;
-
+    public float dashSpeed = 10;
     public GameObject bullet;
     public int initialGunAmmo = 10;
     public int queueGunAmmo = 4;
     public float bulletLife = 2.0f;
     public float bulletSpeed = 2.0f;
+
 
     [HideInInspector]
     public bool isAlive = false;
@@ -33,6 +34,7 @@ public class player1Controller : MonoBehaviour {
 	void FixedUpdate () {
         Walk();
         Shoot();
+        Dash();
 	}
 
     void Walk(){
@@ -47,7 +49,7 @@ public class player1Controller : MonoBehaviour {
     }
 
     void Shoot(){
-        if (Input.GetKeyDown(KeyCode.RightShift) && initialGunAmmo > 0){
+        if (Input.GetKeyDown(KeyCode.Space) && initialGunAmmo > 0){
             ShootBullet();
         }
     }
@@ -96,5 +98,10 @@ public class player1Controller : MonoBehaviour {
     public void StoreBullet(GameObject bulletInstance){
         bulletInstance.SetActive(false);
         gunQueue.Enqueue(bulletInstance);
+    }
+
+    void Dash(){
+        if (Input.GetKeyDown(KeyCode.RightShift))
+            playerRB.velocity *= dashSpeed;
     }
 }
