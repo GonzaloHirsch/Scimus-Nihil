@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class player1Controller : MonoBehaviour {
 
-	// Use this for initialization
+    public float playerSpeed = 10f;
+    public GameObject bullet;
+
+    private Vector2 moveDirection;
+    private Rigidbody2D playerRB;
+
 	void Start () {
-		
+        playerRB = GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	void FixedUpdate () {
+        Walk();
 	}
+
+    void Walk(){
+        moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        playerRB.position += moveDirection * Time.deltaTime * playerSpeed;
+    }
 }
