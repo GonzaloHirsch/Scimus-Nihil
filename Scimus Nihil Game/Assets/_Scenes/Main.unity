@@ -413,8 +413,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HotColdSprites: []
-  ProxText: {fileID: 0}
-  BlackScreen: {fileID: 0}
+  ProxText: {fileID: 1479280257}
+  BlackScreen: {fileID: 1697079550}
   FadeOutSpeed: 5
 --- !u!114 &999046992
 MonoBehaviour:
