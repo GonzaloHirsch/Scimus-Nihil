@@ -38,7 +38,6 @@ public class player1Controller : MonoBehaviour {
             Walk();
             Shoot();
             Dash();
-            print(nearCount);
             if (nearCount >= plantCountDeath)
                 isAlive = false;
         }
@@ -51,7 +50,7 @@ public class player1Controller : MonoBehaviour {
 
         playerRB.position += moveDirection * Time.deltaTime * currentSpeed;
 
-        if (System.Math.Abs(horizInput) > EPSILON || System.Math.Abs(vertInput) > EPSILON)
+        if (System.Math.Abs(horizInput) > EPSILON)
             bulletDirection = GetDirection(horizInput);
     }
 
@@ -108,11 +107,9 @@ public class player1Controller : MonoBehaviour {
     }
 
     void Dash(){
-        if (Input.GetKeyDown(KeyCode.RightShift)){
-            print("shift");
+        if (Input.GetKeyDown(KeyCode.RightShift))
             currentSpeed *= dashSpeed;
-        } else {
+        else
             currentSpeed = playerSpeed;
-        }
     }
 }
