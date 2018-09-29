@@ -9,6 +9,7 @@ public class player2Controller : MonoBehaviour
     char currentChar;
 
     public Sprite[] HotColdSprites;
+    public SpriteRenderer ProxText;
 
     public GameObject BlackScreen;
     SpriteRenderer blackScreenRenderer;
@@ -23,9 +24,9 @@ public class player2Controller : MonoBehaviour
 
     private void Update()
     {
-        fadeOut();
+        fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
-
+        fadeOut(ProxText, 0.75f);
     }
 
     void checkKeyDown()
@@ -40,7 +41,20 @@ public class player2Controller : MonoBehaviour
                     currentChar = getRandomChar();
                 } else
                 {
-                    //Vector2.Distance(keysMap[c]
+                    float d = Vector2.Distance(keysMap[c], keysMap[currentChar]);
+                    if (d < 2)
+                    {
+                        ProxText.sprite = HotColdSprites[3];
+                    }
+                    else if (d < 3)
+                    {
+                        ProxText.sprite = HotColdSprites[2];
+                    }
+                    else
+                    {
+                        ProxText.sprite = HotColdSprites[1];
+                    }
+                    ShowSprite(ProxText);
                 }
             }
         }
@@ -48,10 +62,7 @@ public class player2Controller : MonoBehaviour
 
     void charFound()
     {
-        Color color = blackScreenRenderer.color;
-        color.a = 0;
-        blackScreenRenderer.color = color;
-
+        HideSprite(blackScreenRenderer);
     }
 
     char getRandomChar()
@@ -59,11 +70,34 @@ public class player2Controller : MonoBehaviour
         return charAllowed[Random.Range(0, charAllowed.Length)];
     }
 
-    void fadeOut()
+    void fadeOut(SpriteRenderer renderer, float speed)
     {
-        Color color = blackScreenRenderer.color;
-        color.a += FadeOutSpeed * Time.deltaTime;
-        blackScreenRenderer.color = color;
+        Color color = renderer.color;
+        color.a -= speed * Time.deltaTime;
+        renderer.color = color;
+    }
+
+    void fadeIn(SpriteRenderer renderer, float speed)
+    {
+        Color color = renderer.color;
+        color.a += speed * Time.deltaTime;
+        renderer.color = color;
+    }
+
+    void HideSprite(SpriteRenderer renderer)
+    {
+        Color color = renderer.color;
+        color.a = 0;
+        renderer.color = color;
+
+    }
+
+    void ShowSprite(SpriteRenderer renderer)
+    {
+        Color color = renderer.color;
+        color.a = 1;
+        renderer.color = color;
+
     }
 
     void initKeysMap()
