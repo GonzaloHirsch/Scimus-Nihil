@@ -4,7 +4,6 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
-Scimus_Nihil_Game/Assets/*.meta
 
 # Visual Studio cache directory
 .vs/
