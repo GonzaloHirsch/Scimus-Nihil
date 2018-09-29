@@ -111,4 +111,9 @@ public class player1Controller : MonoBehaviour {
             currentSpeed = playerSpeed;
         }
     }
+
+    void CheckRadius(){
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position,5,Vector2.up);
+
+    }
 }

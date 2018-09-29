@@ -5,15 +5,18 @@ using UnityEngine;
 public class spawnerController : MonoBehaviour {
 
     public GameObject plant;
+    [HideInInspector]
+    public float waitTimeTotal;
 
+    private float waitTime = 0f;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
 	void Update () {
-		
+        waitTime += Time.deltaTime;
+        SpawnPlants();
 	}
+
+    public void SpawnPlants(){
+        if (waitTime >= waitTimeTotal)
+            Instantiate(plant);
+    }
 }
