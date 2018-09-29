@@ -33,9 +33,11 @@ public class player1Controller : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-        Walk();
-        Shoot();
-        Dash();
+        if (isAlive){
+            Walk();
+            Shoot();
+            Dash();
+        }
 	}
 
     void Walk(){
