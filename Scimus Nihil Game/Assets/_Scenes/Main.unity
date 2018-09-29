@@ -767,6 +767,7 @@ MonoBehaviour:
   isAlive: 0
   plantCountDeath: 15
   nearCount: 0
+  score: 0
 --- !u!50 &999046993
 Rigidbody2D:
   serializedVersion: 4

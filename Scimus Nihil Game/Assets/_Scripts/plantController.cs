@@ -125,6 +125,7 @@ public class plantController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision){
         if (collision.gameObject.CompareTag("Bullet")){
             isAlive = false;
+            player.GetComponent<player1Controller>().score++;
             plantRenderer.sprite = deadSprites[spriteIndex];
         }
     }

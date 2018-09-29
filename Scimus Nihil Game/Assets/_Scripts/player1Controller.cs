@@ -16,7 +16,13 @@ public class player1Controller : MonoBehaviour {
     public int plantCountDeath = 20;
     [HideInInspector]
     public int nearCount = 0;
+    public int score = 0;
+    public float energy = 30;
+    public float energyDecrementConstant = 0.5f;
+    public float energyIncrementConstant = 1f;
+    public int dashAmount = 5;
 
+    private float energydecrement = ;
     private Vector2 moveDirection;
     private Vector2 bulletDirection;
     private Rigidbody2D playerRB;
@@ -88,6 +94,18 @@ public class player1Controller : MonoBehaviour {
         }
     }
 
+    public void LowerEnergy(){
+        energy -= energydecrement;
+    }
+
+    public void IncrementEnergyDecrement(){
+        energydecrement += energyDecrementConstant;
+    }
+
+    public void IncrementEnergy(){
+        energy += energyIncrementConstant;
+    }
+
     void ShootBullet(){
         //initialGunAmmo--;
         GameObject bulletInstance = gunQueue.Dequeue();
@@ -107,6 +125,9 @@ public class player1Controller : MonoBehaviour {
     }
 
     void Dash(){
+        if (Input.GetKeyDown(KeyCode.RightShift)){
+        }
+
         if (Input.GetKeyDown(KeyCode.RightShift))
             currentSpeed *= dashSpeed;
         else
