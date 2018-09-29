@@ -53,6 +53,8 @@ public class plantController : MonoBehaviour {
         int state = (int)Random.Range(0f, 100f);
         if (probabilityOfFollowing >= state)
             follows = true;
+        else
+            ChangeDirection();
     }
 
     void Follow(){
@@ -83,5 +85,11 @@ public class plantController : MonoBehaviour {
             angle = Random.Range(0f, 360f);
         } while (minimunAngleDifference > Mathf.Abs(angle - previousAngle));
         return angle;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision){
+        if (collision.gameObject.CompareTag("Bullet")){
+            isAlive = false;
+        }
     }
 }

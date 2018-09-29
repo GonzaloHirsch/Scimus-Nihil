@@ -22,12 +22,13 @@ public class player1Controller : MonoBehaviour {
     private Queue<GameObject> gunQueue;
     private int gunAmmo;
     private readonly float EPSILON = 0.000000000001f;
+    private float currentSpeed;
 
     void Start () {
         bulletDirection = Vector2.up;
         playerRB = GetComponent<Rigidbody2D>();
         gunAmmo = initialGunAmmo;
-
+        currentSpeed = playerSpeed;
         FillGun();
 	}
 	
@@ -42,7 +43,7 @@ public class player1Controller : MonoBehaviour {
         float vertInput = Input.GetAxis("Vertical");
         moveDirection = new Vector2(horizInput, vertInput);
 
-        playerRB.position += moveDirection * Time.deltaTime * playerSpeed;
+        playerRB.position += moveDirection * Time.deltaTime * currentSpeed;
 
         if (System.Math.Abs(horizInput) > EPSILON || System.Math.Abs(vertInput) > EPSILON)
             bulletDirection = GetDirection(horizInput);
@@ -101,7 +102,11 @@ public class player1Controller : MonoBehaviour {
     }
 
     void Dash(){
-        if (Input.GetKeyDown(KeyCode.RightShift))
-            playerRB.velocity *= dashSpeed;
+        if (Input.GetKeyDown(KeyCode.RightShift)){
+            print("shift");
+            currentSpeed *= dashSpeed;
+        } else {
+            currentSpeed = playerSpeed;
+        }
     }
 }

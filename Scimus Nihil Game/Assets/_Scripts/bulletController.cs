@@ -6,6 +6,7 @@ public class bulletController : MonoBehaviour {
 
     [HideInInspector]
     public float bulletLife = 2.0f;
+    [HideInInspector]
     public bool canMove = false;
     public float bulletSpeed = 2.0f;
     [HideInInspector]
@@ -38,5 +39,11 @@ public class bulletController : MonoBehaviour {
 
     void BulletMovement(){
         bulletBody.position += direction * Time.deltaTime * bulletSpeed; 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision){
+        var component = collision.gameObject.GetComponent<plantController>();
+        if (component != null)
+            existanceTime = bulletLife;
     }
 }
