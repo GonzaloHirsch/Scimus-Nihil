@@ -22,7 +22,7 @@ public class player1Controller : MonoBehaviour {
     public float energyIncrementConstant = 1f;
     public int dashAmount = 5;
 
-    private float energydecrement = ;
+    private float energydecrement = 0.1f;
     private Vector2 moveDirection;
     private Vector2 bulletDirection;
     private Rigidbody2D playerRB;

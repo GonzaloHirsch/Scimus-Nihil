@@ -15,8 +15,11 @@ public class player2Controller : MonoBehaviour
     SpriteRenderer blackScreenRenderer;
     public float FadeOutSpeed = 5f;
 
+    player1Controller p1c;
+
     private void Start()
     {
+        p1c = GetComponent<player1Controller>();
         currentChar = getRandomChar();
         blackScreenRenderer = BlackScreen.GetComponent<SpriteRenderer>();
         initKeysMap();
@@ -27,6 +30,7 @@ public class player2Controller : MonoBehaviour
         fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
         fadeOut(ProxText, 0.75f);
+        print(p1c.energy);
     }
 
     void checkKeyDown()
@@ -39,6 +43,7 @@ public class player2Controller : MonoBehaviour
                 {
                     charFound();
                     currentChar = getRandomChar();
+                    p1c.IncrementEnergyDecrement();
                 } else
                 {
                     float d = Vector2.Distance(keysMap[c], keysMap[currentChar]);
@@ -55,6 +60,7 @@ public class player2Controller : MonoBehaviour
                         ProxText.sprite = HotColdSprites[1];
                     }
                     ShowSprite(ProxText);
+                    p1c.LowerEnergy();
                 }
             }
         }
