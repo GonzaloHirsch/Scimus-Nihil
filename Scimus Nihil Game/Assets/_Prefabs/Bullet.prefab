@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212830614781304764}
   - component: {fileID: 50973281624449730}
   - component: {fileID: 60385772548894130}
+  - component: {fileID: 114733966312129740}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1235481871623174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.35570714, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,6 +91,24 @@ PolygonCollider2D:
       - {x: -0.03, y: -0.024999999}
       - {x: 0.03, y: -0.024999999}
       - {x: 0.03, y: 0.024999999}
+--- !u!114 &114733966312129740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1235481871623174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383dee25ef60e48b0a6003f08de3818c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletLife: 2
+  canMove: 1
+  bulletSpeed: 1
+  existanceTime: 0
+  direction: {x: -1, y: 0}
+  bulletBody: {fileID: 0}
+  bulletTransform: {fileID: 0}
 --- !u!212 &212830614781304764
 SpriteRenderer:
   m_ObjectHideFlags: 1
