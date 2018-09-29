@@ -7,27 +7,28 @@ public class player1Controller : MonoBehaviour {
     public float playerSpeed = 10f;
     public float dashSpeed = 10;
     public GameObject bullet;
-    public int initialGunAmmo = 10;
+    //public int initialGunAmmo = 10;
     public int queueGunAmmo = 4;
     public float bulletLife = 2.0f;
     public float bulletSpeed = 2.0f;
-
-
     [HideInInspector]
     public bool isAlive = false;
+    public int plantCountDeath = 20;
+    [HideInInspector]
+    public int nearCount = 0;
 
     private Vector2 moveDirection;
     private Vector2 bulletDirection;
     private Rigidbody2D playerRB;
     private Queue<GameObject> gunQueue;
-    private int gunAmmo;
+    //private int gunAmmo;
     private readonly float EPSILON = 0.000000000001f;
     private float currentSpeed;
 
     void Start () {
         bulletDirection = Vector2.up;
         playerRB = GetComponent<Rigidbody2D>();
-        gunAmmo = initialGunAmmo;
+        //gunAmmo = initialGunAmmo;
         currentSpeed = playerSpeed;
         FillGun();
 	}
@@ -37,8 +38,10 @@ public class player1Controller : MonoBehaviour {
             Walk();
             Shoot();
             Dash();
+            print(nearCount);
+            if (nearCount >= plantCountDeath)
+                isAlive = false;
         }
-        CheckRadius();
 	}
 
     void Walk(){
@@ -53,7 +56,7 @@ public class player1Controller : MonoBehaviour {
     }
 
     void Shoot(){
-        if (Input.GetKeyDown(KeyCode.Space) && initialGunAmmo > 0){
+        if (Input.GetKeyDown(KeyCode.Space) /*&& initialGunAmmo > 0*/){
             ShootBullet();
         }
     }
@@ -87,7 +90,7 @@ public class player1Controller : MonoBehaviour {
     }
 
     void ShootBullet(){
-        initialGunAmmo--;
+        //initialGunAmmo--;
         GameObject bulletInstance = gunQueue.Dequeue();
         bulletController controller = bulletInstance.GetComponent<bulletController>();
 
@@ -111,11 +114,5 @@ public class player1Controller : MonoBehaviour {
         } else {
             currentSpeed = playerSpeed;
         }
-    }
-
-    void CheckRadius(){
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position,5,Vector2.up);
-        if (hit)
-            Debug.Log(hit.collider.name);
     }
 }

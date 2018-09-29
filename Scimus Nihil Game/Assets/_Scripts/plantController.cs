@@ -14,15 +14,19 @@ public class plantController : MonoBehaviour {
     public float plantRoamSpeed = 2f;
     public float directionChangeTime = 3f;
     public float minimunAngleDifference = 45f;
+    [HideInInspector]
+    public bool isAlive = true;
+    public float minimumPlayerDistance = 3f;
 
     private SpriteRenderer plantRenderer;
     private int spritesSize;
-    private bool isAlive = true;
     private bool follows;
     private GameObject player;
     private float directionRealTime = 0f;
     private Vector2 versorDirection;
     private float previousAngle = 0;
+    private float distance;
+    private bool isInRange = false;
 
 	void Start () {
         spritesSize = walkingSprites.Length;
@@ -36,14 +40,45 @@ public class plantController : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-        if (isAlive){
-            if (follows){
+        if (isAlive)
+        {
+            if (follows)
+            {
                 Follow();
-            } else {
+            }
+            else
+            {
                 Roam();
             }
+            UpdateDistanceStatus();
+            if (distance <= minimumPlayerDistance && !isInRange)
+            {
+                player.GetComponent<player1Controller>().nearCount++;
+                isInRange = true;
+            }
+            else if (distance > minimumPlayerDistance && isInRange)
+            {
+                player.GetComponent<player1Controller>().nearCount--;
+                isInRange = false;
+            }
+        }
+        else if (!isAlive)
+            DeactivateColliderAndRb();
+
+        if (isInRange && !isAlive){
+            player.GetComponent<player1Controller>().nearCount--;
+            isInRange = false;
         }
 	}
+
+    void DeactivateColliderAndRb(){
+        Destroy(GetComponent<Collider2D>());
+        Destroy(GetComponent<Rigidbody2D>());
+    }
+
+    void UpdateDistanceStatus(){
+        distance = Vector2.Distance(player.transform.position, transform.position);
+    }
 
     void SetSprites(int spriteNumber){
         plantRenderer.sprite = walkingSprites[spriteNumber];

@@ -6,7 +6,7 @@ public class spawnerController : MonoBehaviour {
 
     public GameObject plant;
     [HideInInspector]
-    public float waitTimeTotal;
+    public float waitTimeTotal = 8f;
 
     private float waitTime = 0f;
 
@@ -17,6 +17,7 @@ public class spawnerController : MonoBehaviour {
 
     public void SpawnPlants(){
         if (waitTime >= waitTimeTotal){
+            waitTime = 0f;
             GameObject instance = Instantiate(plant);
             instance.transform.position = transform.position;
         }

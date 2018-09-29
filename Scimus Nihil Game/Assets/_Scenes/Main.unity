@@ -205,6 +205,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0559eaa04bde4933a22c352cf593ee3, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &212278534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
+    type: 2}
+  m_PrefabInternal: {fileID: 39145523}
 --- !u!1001 &505730829
 Prefab:
   m_ObjectHideFlags: 0
@@ -540,6 +545,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &881014820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
+    type: 2}
+  m_PrefabInternal: {fileID: 8652090}
 --- !u!1001 &911792178
 Prefab:
   m_ObjectHideFlags: 0
@@ -599,7 +609,6 @@ GameObject:
   - component: {fileID: 999046991}
   - component: {fileID: 999046990}
   - component: {fileID: 999046989}
-  - component: {fileID: 999046988}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -607,21 +616,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!58 &999046988
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 999046987}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.4
 --- !u!70 &999046989
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -716,11 +710,12 @@ MonoBehaviour:
   playerSpeed: 4
   dashSpeed: 5
   bullet: {fileID: 1235481871623174, guid: ba910a112dd4a42d8ada88883b8267ae, type: 2}
-  initialGunAmmo: 10
-  queueGunAmmo: 5
-  bulletLife: 3
+  queueGunAmmo: 13
+  bulletLife: 1.8
   bulletSpeed: 2
   isAlive: 0
+  plantCountDeath: 13
+  nearCount: 0
 --- !u!50 &999046993
 Rigidbody2D:
   serializedVersion: 4
@@ -870,7 +865,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantSpawnTime: 0
-  spawners: []
+  spawners:
+  - {fileID: 1781258374}
+  - {fileID: 1610643699}
+  - {fileID: 1425739847}
+  - {fileID: 2039760201}
+  - {fileID: 2093932008}
+  - {fileID: 212278534}
+  - {fileID: 881014820}
 --- !u!4 &1331211982
 Transform:
   m_ObjectHideFlags: 0
@@ -884,6 +886,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1425739847 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
+    type: 2}
+  m_PrefabInternal: {fileID: 505730829}
 --- !u!1 &1479280255
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +966,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1610643699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
+    type: 2}
+  m_PrefabInternal: {fileID: 911792178}
 --- !u!1 &1697079550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1046,16 @@ Transform:
   m_Father: {fileID: 519420032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1781258374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1192773872}
+--- !u!1 &2039760201 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1051310135}
 --- !u!1 &2059810268
 GameObject:
   m_ObjectHideFlags: 0
@@ -71222,6 +71244,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &2093932008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
+    type: 2}
+  m_PrefabInternal: {fileID: 856184622}
 --- !u!1 &2101006486
 GameObject:
   m_ObjectHideFlags: 3

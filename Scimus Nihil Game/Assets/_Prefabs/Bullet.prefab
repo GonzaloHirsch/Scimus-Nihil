@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletLife: 2
   canMove: 1
-  bulletSpeed: 4
+  bulletSpeed: 8
   existanceTime: 0
   direction: {x: -1, y: 0}
   bulletBody: {fileID: 0}
