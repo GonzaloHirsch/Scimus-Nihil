@@ -11,6 +11,7 @@ public class player2Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        int horizontal = (int) Input.GetAxisRaw("ArrowHorizontal");
+        int vertical = (int) Input.GetAxisRaw("ArrowVertical");
 	}
 }
