@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 50831805444715248}
   - component: {fileID: 212434502057395442}
   - component: {fileID: 114870905954810968}
-  - component: {fileID: 61078766469857180}
+  - component: {fileID: 58636987830863918}
   m_Layer: 0
   m_Name: Plants
   m_TagString: Untagged
@@ -63,8 +63,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61078766469857180
-BoxCollider2D:
+--- !u!58 &58636987830863918
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -76,18 +76,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13}
-  m_EdgeRadius: 0
+  m_Radius: 0.13
 --- !u!114 &114870905954810968
 MonoBehaviour:
   m_ObjectHideFlags: 1

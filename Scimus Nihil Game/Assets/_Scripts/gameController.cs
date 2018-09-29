@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class gameController : MonoBehaviour {
 
-    public player1Controller player1;
     public static gameController instance = null;
+    [HideInInspector]
     public float plantSpawnTime;
     public GameObject[] spawners;
 
     private float totalTime = 0f;
+    private player1Controller player1;
 
     private void Awake()
     {

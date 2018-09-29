@@ -38,6 +38,7 @@ public class player1Controller : MonoBehaviour {
             Shoot();
             Dash();
         }
+        CheckRadius();
 	}
 
     void Walk(){
@@ -114,6 +115,7 @@ public class player1Controller : MonoBehaviour {
 
     void CheckRadius(){
         RaycastHit2D hit = Physics2D.CircleCast(transform.position,5,Vector2.up);
-
+        if (hit)
+            Debug.Log(hit.collider.name);
     }
 }
