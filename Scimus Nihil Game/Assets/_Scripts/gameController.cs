@@ -47,6 +47,6 @@ public class gameController : MonoBehaviour {
     }
 
     int SpawnFunction(float time){
-        return (int)(40 / ((time/7) + 5));
+        return (int)(40 / (time + 5));
     }
 }
