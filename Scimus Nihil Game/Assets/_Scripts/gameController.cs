@@ -7,6 +7,9 @@ public class gameController : MonoBehaviour {
     public player1Controller player1;
     public static gameController instance = null;
     public float plantSpawnTime;
+    public GameObject[] spawners;
+
+    private float totalTime = 0f;
 
     private void Awake()
     {
@@ -22,15 +25,14 @@ public class gameController : MonoBehaviour {
 
     void Start () {
         MainMenu();
-        PlayGame();
 	}
 	
 	void Update () {
-		
+        PlayGame();
 	}
 
     void MainMenu(){
-
+        player1.isAlive = true;
     }
 
     void Credits(){
@@ -38,7 +40,9 @@ public class gameController : MonoBehaviour {
     }
 
     void PlayGame(){
-        player1.isAlive = true;
+        totalTime += Time.deltaTime;
+        for (int i = 0; i < spawners.Length; i++)
+            spawners[i].GetComponent<spawnerController>().waitTimeTotal = SpawnFunction(totalTime);
     }
 
     int SpawnFunction(float time){
