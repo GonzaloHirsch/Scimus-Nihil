@@ -16,7 +16,10 @@ public class spawnerController : MonoBehaviour {
 	}
 
     public void SpawnPlants(){
-        if (waitTime >= waitTimeTotal)
-            Instantiate(plant);
+        if (waitTime >= waitTimeTotal){
+            GameObject instance = Instantiate(plant);
+            instance.transform.position = transform.position;
+        }
+            
     }
 }
