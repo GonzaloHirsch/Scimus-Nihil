@@ -27,7 +27,7 @@ public class player2Controller : MonoBehaviour
 
     private void Update()
     {
-        fadeIn(blackScreenRenderer, FadeOutSpeed);
+        //fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
         fadeOut(ProxText, 0.75f);
         print(p1c.energy);
@@ -59,7 +59,7 @@ public class player2Controller : MonoBehaviour
                     {
                         ProxText.sprite = HotColdSprites[1];
                     }
-                    ShowSprite(ProxText);
+                    ShowSprite(ProxText, p1c.energy/30);
                     p1c.LowerEnergy();
                 }
             }
@@ -98,10 +98,10 @@ public class player2Controller : MonoBehaviour
 
     }
 
-    void ShowSprite(SpriteRenderer renderer)
+    void ShowSprite(SpriteRenderer renderer, float amount)
     {
         Color color = renderer.color;
-        color.a = 1;
+        color.a = amount;
         renderer.color = color;
 
     }
