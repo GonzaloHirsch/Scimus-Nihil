@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4225156828219488}
   - component: {fileID: 96761103447487022}
   m_Layer: 0
-  m_Name: Dash Trail
+  m_Name: dash-trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
