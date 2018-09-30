@@ -17,7 +17,10 @@ public class FlickeringLights : MonoBehaviour {
 	}
 
     void Flicker(){
+
+
         lightIndex = Random.Range(0, lights.Length);
+        print(lightIndex);
         Light myLight = lights[lightIndex];
         DOTween.To(
             getter: () => { return myLight.intensity; },
@@ -26,7 +29,7 @@ public class FlickeringLights : MonoBehaviour {
             duration: 0.5f).OnComplete(() => DOTween.To(
             getter: () => { return myLight.intensity; },
             setter: (float value) => { myLight.intensity = value; },
-                endValue: Random.Range(4.5f, 6.5f),
+                endValue: Random.Range(3.5f, 6.5f),
             duration: 0.5f));
     }
 }

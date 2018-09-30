@@ -218,6 +218,6 @@ public class player1Controller : MonoBehaviour {
         if(isAlive)
             scoreText.SetText("Plants Watered: " + score);
         else
-            scoreText.SetText("Civilians Killed: " + score);
+            scoreText.SetText("Civillians Killed: " + score);
     }
 }

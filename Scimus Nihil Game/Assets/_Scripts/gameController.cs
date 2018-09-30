@@ -19,6 +19,7 @@ public class gameController : MonoBehaviour {
     public Image titleScreen;
     public Image credits;
     public CinemachineVirtualCamera virtualCam;
+    public GameObject[] uis;
    
 
     public AudioSource endAudio;
@@ -72,6 +73,8 @@ public class gameController : MonoBehaviour {
 
                     isEnding = false;
 
+                    uis[0].SetActive(false);
+
                     Credits();
                 }
             }
@@ -107,6 +110,10 @@ public class gameController : MonoBehaviour {
             player1.playerAnimator.SetTrigger("PlayerRun");
 
             Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+            foreach(GameObject i in uis)
+            {
+                i.SetActive(true);
+            }
             
         }
     }
@@ -122,8 +129,8 @@ public class gameController : MonoBehaviour {
     void Credits(){
         credits.enabled = true;
         creditsBG.enabled = true;
-        creditsBG.DOFade(1f, 20f);
-        credits.DOFade(1f, 20f);
+        creditsBG.DOFade(0.8f, 20f);
+        credits.DOFade(0.8f, 20f);
         var pixCam = Camera.main.GetComponent<PixelPerfectCamera>();
         DOTween.To(
             getter: () => { return pixCam.assetsPPU; },
