@@ -12,7 +12,7 @@ public class spawnerController : MonoBehaviour {
 
     private float waitTime = 0f;
 
-	void Update () {
+    void Update () {
         waitTime += Time.deltaTime;
         if (isActive)
             SpawnPlants();
@@ -24,6 +24,5 @@ public class spawnerController : MonoBehaviour {
             GameObject instance = Instantiate(plant);
             instance.transform.position = transform.position;
         }
-            
     }
 }

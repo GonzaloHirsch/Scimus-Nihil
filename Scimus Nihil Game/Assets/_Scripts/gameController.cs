@@ -84,13 +84,19 @@ public class gameController : MonoBehaviour {
 
     void PlayerDeath(){
         player1.playerAnimator.SetTrigger("PlayerDie");
+        DeactivateSpawners();
         player2.enabled = false;
     }
 
     void PlayGame(){
         totalTime += Time.deltaTime;
         for (int i = 0; i < spawners.Length; i++)
-            spawners[i].GetComponent<spawnerController>().waitTimeTotal = SpawnFunction(totalTime);
+        {
+            if (SpawnFunction(totalTime) == 0)
+                spawners[i].GetComponent<spawnerController>().waitTimeTotal = 0.75f;
+            else
+                spawners[i].GetComponent<spawnerController>().waitTimeTotal = SpawnFunction(totalTime);
+        }
     }
 
     int SpawnFunction(float time){
@@ -101,4 +107,11 @@ public class gameController : MonoBehaviour {
         for (int i = 0; i < spawners.Length; i++)
             spawners[i].GetComponent<spawnerController>().isActive = true;;
     }
+
+    void DeactivateSpawners()
+    {
+        for (int i = 0; i < spawners.Length; i++)
+            spawners[i].GetComponent<spawnerController>().isActive = false; ;
+    }
 }
+
