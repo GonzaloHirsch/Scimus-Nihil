@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 212434502057395442}
   - component: {fileID: 114870905954810968}
   - component: {fileID: 58636987830863918}
+  - component: {fileID: 95109937671633812}
   m_Layer: 8
   m_Name: Plants
   m_TagString: Untagged
@@ -78,6 +79,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.13
+--- !u!95 &95109937671633812
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267504061578324}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0aeecddbe3c7e4c3f8eaa3441418203d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114870905954810968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,9 +109,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSprites:
-  - {fileID: 21300000, guid: a2219dfebf20b487c887bc80b28e3acf, type: 3}
-  deadSprites:
   - {fileID: 0}
+  - {fileID: 0}
+  deadSprites:
+  - {fileID: 21300000, guid: 4bea524c358df434ca50833620ddcbcf, type: 3}
+  - {fileID: 21300000, guid: ab13f183d9f4a41308232ccc9de09d20, type: 3}
   spriteIndex: 0
   probabilityOfFollowing: 75
   plantFollowSpeed: 2
