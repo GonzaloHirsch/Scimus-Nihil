@@ -35,7 +35,6 @@ public class player2Controller : MonoBehaviour
         checkKeyDown();
     }
 
-    int count = 0;
 
     void checkKeyDown()
     {
@@ -43,12 +42,17 @@ public class player2Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(c.ToString()))
             {
+                ShowSprite(HotColdSprites[0], 0);
+                ShowSprite(HotColdSprites[1], 0);
+                ShowSprite(HotColdSprites[2], 0);
+                ShowSprite(HotColdSprites[3], 0);
                 if (c == currentChar)
                 {
+                    HotColdSprites[3].DOKill();
                     charFound();
                     currentChar = getRandomChar();
-                    print(count);
-                    count = 0;
+                    ShowSprite(HotColdSprites[3], 1);
+                    HotColdSprites[3].DOFade(0, 1);
                     //p1c.IncrementEnergyDecrement();
                 }
                 else
@@ -56,13 +60,16 @@ public class player2Controller : MonoBehaviour
                     float d = Vector2.Distance(keysMap[c], keysMap[currentChar]);
                     if (d < 2)
                     {
+                        HotColdSprites[0].DOKill();
                         ShowSprite(HotColdSprites[0], 1);
-                        HotColdSprites[0].DOFade(0.1f, 1);
+                        HotColdSprites[0].DOFade(0, 1);
                         proxSound.pitch = 3;
                         proxSound.volume = 1;
                     }
                     else if (d < 3)
                     {
+                        HotColdSprites[1].DOKill();
+                        print("Da fuk");
                         ShowSprite(HotColdSprites[1], 1);
                         HotColdSprites[1].DOFade(0, 1);
                         proxSound.pitch = 2;
@@ -70,6 +77,7 @@ public class player2Controller : MonoBehaviour
                     }
                     else
                     {
+                        HotColdSprites[2].DOKill();
                         ShowSprite(HotColdSprites[2], 1);
                         HotColdSprites[2].DOFade(0, 1);
                         proxSound.pitch = 1;
@@ -78,7 +86,6 @@ public class player2Controller : MonoBehaviour
 
                     p1c.LowerEnergy();
                     proxSound.Play();
-                    count++;
                 }
             }
         }

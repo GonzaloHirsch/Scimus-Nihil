@@ -97,10 +97,20 @@ public class plantController : MonoBehaviour {
         {
             print("fuck you");
             isAlive = false;
-            GetComponent<SpriteRenderer>().sprite = deadCivil[Random.Range(0, deadCivil.Length - 1)];//walkingCivil[Random.Range(0, walkingCivil.Length - 1)];
+            Destroy(GetComponent<SpriteRenderer>());
+            GameObject child = new GameObject();
+            child.transform.parent = transform;
+            child.transform.localPosition = new Vector3(0, 0, 0);
+            child.transform.localScale *= 2;
+            child.AddComponent<SpriteRenderer>().sprite = walkingCivil[Random.Range(0, walkingCivil.Length)];
+            child.GetComponent<SpriteRenderer>().sortingOrder = 2;
         }
         else
-            GetComponent<SpriteRenderer>().sprite = walkingCivil[Random.Range(0, walkingCivil.Length - 1)];
+        {
+            GetComponent<SpriteRenderer>().sprite = deadCivil[Random.Range(0, walkingCivil.Length)];
+            transform.localScale *= 0.75f;
+            GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
     }
 
     void DeactivateColliderAndRb(){

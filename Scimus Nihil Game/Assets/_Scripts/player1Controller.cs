@@ -29,6 +29,7 @@ public class player1Controller : MonoBehaviour {
     public Rigidbody2D playerRB;
     [HideInInspector]
     public Animator playerAnimator;
+    public GameObject clouds;
 
     private float energydecrement = 0.1f;
     private Vector2 moveDirection;
@@ -65,6 +66,7 @@ public class player1Controller : MonoBehaviour {
             {
                 isAlive = false;
                 GetComponent<Collider2D>().enabled = false;
+                clouds.SetActive(false);
             }
 
             getTile();
