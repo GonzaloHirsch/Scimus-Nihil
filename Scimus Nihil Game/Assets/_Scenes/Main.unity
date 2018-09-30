@@ -797,7 +797,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999046987}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24f6e652ee1ae4fd5b49e96b7a166939, type: 3}
   m_Name: 
@@ -832,9 +832,10 @@ MonoBehaviour:
   nearCount: 0
   score: 0
   energy: 30
+  maxEnergy: 60
   energyDecrementConstant: 0.5
   energyIncrementConstant: 1
-  dashAmount: 5
+  dashEnergyLoss: 15
 --- !u!50 &999046993
 Rigidbody2D:
   serializedVersion: 4

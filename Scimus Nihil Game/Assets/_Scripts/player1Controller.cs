@@ -17,10 +17,13 @@ public class player1Controller : MonoBehaviour {
     [HideInInspector]
     public int nearCount = 0;
     public int score = 0;
-    public float energy = 30;
+    public float energy = 30f;
+    public float maxEnergy = 60f;
     public float energyDecrementConstant = 0.5f;
     public float energyIncrementConstant = 1f;
-    public int dashAmount = 5;
+    public float dashEnergyLoss = 15f;
+    [HideInInspector]
+    public bool isDashing = false;
 
     private float energydecrement = 0.1f;
     private Vector2 moveDirection;
@@ -31,6 +34,7 @@ public class player1Controller : MonoBehaviour {
     private readonly float EPSILON = 0.000000000001f;
     private float currentSpeed;
 
+
     void Start () {
         bulletDirection = Vector2.up;
         playerRB = GetComponent<Rigidbody2D>();
@@ -38,12 +42,17 @@ public class player1Controller : MonoBehaviour {
         currentSpeed = playerSpeed;
         FillGun();
 	}
-	
-	void FixedUpdate () {
+
+    private void Update()
+    {
+        if (isAlive)
+            Dash();
+    }
+
+    void FixedUpdate () {
         if (isAlive){
             Walk();
             Shoot();
-            Dash();
             if (nearCount >= plantCountDeath)
                 isAlive = false;
         }
@@ -103,7 +112,10 @@ public class player1Controller : MonoBehaviour {
     }
 
     public void IncrementEnergy(){
-        energy += energyIncrementConstant;
+        if ((energy + energyIncrementConstant) >= maxEnergy)
+            energy = maxEnergy;
+        else 
+            energy += energyIncrementConstant;
     }
 
     void ShootBullet(){
@@ -125,12 +137,11 @@ public class player1Controller : MonoBehaviour {
     }
 
     void Dash(){
-        if (Input.GetKeyDown(KeyCode.RightShift)){
+        if (dashEnergyLoss <= energy && Input.GetKeyDown(KeyCode.RightShift)){
+            energy -= dashEnergyLoss;
+            isDashing = true;
+        } else {
+            isDashing = false;
         }
-
-        if (Input.GetKeyDown(KeyCode.RightShift))
-            currentSpeed *= dashSpeed;
-        else
-            currentSpeed = playerSpeed;
     }
 }

@@ -101,6 +101,7 @@ MonoBehaviour:
   minimunAngleDifference: 45
   isAlive: 1
   minimumPlayerDistance: 3
+  explosionForce: 100000
 --- !u!212 &212434502057395442
 SpriteRenderer:
   m_ObjectHideFlags: 1

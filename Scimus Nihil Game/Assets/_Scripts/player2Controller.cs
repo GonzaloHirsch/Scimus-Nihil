@@ -30,7 +30,7 @@ public class player2Controller : MonoBehaviour
         //fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
         fadeOut(ProxText, 0.75f);
-        print(p1c.energy);
+        //print(p1c.energy);
     }
 
     void checkKeyDown()
