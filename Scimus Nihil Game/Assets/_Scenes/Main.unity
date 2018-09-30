@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 25
+  m_AssetsPPU: 42
   m_RefResolutionX: 320
   m_RefResolutionY: 180
   m_UpscaleRT: 0
@@ -371,7 +371,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 3.7
+  orthographic size: 3.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -466,7 +466,7 @@ Grid:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 660666326}
   m_Enabled: 1
-  m_CellSize: {x: 0.321, y: 0.321, z: 0}
+  m_CellSize: {x: 0.32, y: 0.32, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
@@ -539,6 +539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 859262748}
   - component: {fileID: 859262747}
+  - component: {fileID: 859262750}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -567,7 +568,7 @@ MonoBehaviour:
   m_Follow: {fileID: 999046994}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 3.7
+    OrthographicSize: 3.5
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -596,6 +597,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &859262750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 859262746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 1
 --- !u!1 &881014820 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
@@ -660,6 +675,7 @@ GameObject:
   - component: {fileID: 999046991}
   - component: {fileID: 999046990}
   - component: {fileID: 999046989}
+  - component: {fileID: 999046988}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -667,6 +683,53 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &999046988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 999046987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: 
+  m_UseImpactDirection: 0
+  m_ScaleImpactWithMass: 0
+  m_ScaleImpactWithSpeed: 0
 --- !u!70 &999046989
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -765,9 +828,13 @@ MonoBehaviour:
   bulletLife: 1.5
   bulletSpeed: 2
   isAlive: 0
-  plantCountDeath: 15
+  plantCountDeath: 20
   nearCount: 0
   score: 0
+  energy: 30
+  energyDecrementConstant: 0.5
+  energyIncrementConstant: 1
+  dashAmount: 5
 --- !u!50 &999046993
 Rigidbody2D:
   serializedVersion: 4
@@ -1071,7 +1138,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1479280255}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.14, y: -2.49, z: 10}
+  m_LocalPosition: {x: 5.69, y: -2.58, z: 10}
   m_LocalScale: {x: 1.215, y: 1.403, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
