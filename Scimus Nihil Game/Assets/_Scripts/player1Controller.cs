@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class player1Controller : MonoBehaviour {
 
@@ -38,14 +39,14 @@ public class player1Controller : MonoBehaviour {
     private float currentSpeed;
 
 
-    void Start () {
+    void Start() {
         bulletDirection = Vector2.up;
         playerRB = GetComponent<Rigidbody2D>();
         //gunAmmo = initialGunAmmo;
         currentSpeed = playerSpeed;
         FillGun();
         playerAnimator = GetComponent<Animator>();
-	}
+    }
 
     private void Update()
     {
@@ -53,16 +54,17 @@ public class player1Controller : MonoBehaviour {
             Dash();
     }
 
-    void FixedUpdate () {
-        if (isAlive){
+    void FixedUpdate() {
+        if (isAlive) {
             Walk();
             Shoot();
             if (nearCount >= plantCountDeath)
                 isAlive = false;
+            getTile();
         }
-	}
+    }
 
-    void Walk(){
+    void Walk() {
         float horizInput = Input.GetAxis("Horizontal");
         float vertInput = Input.GetAxis("Vertical");
         moveDirection = new Vector2(horizInput, vertInput);
@@ -73,26 +75,26 @@ public class player1Controller : MonoBehaviour {
             bulletDirection = GetDirection(horizInput);
     }
 
-    void Shoot(){
-        if (Input.GetKeyDown(KeyCode.Space) /*&& initialGunAmmo > 0*/){
+    void Shoot() {
+        if (Input.GetKeyDown(KeyCode.Space) /*&& initialGunAmmo > 0*/) {
             ShootBullet();
         }
     }
 
     //Si queremos agregar para arriba agregamos el float del axis
-    Vector2 GetDirection(float horizAxis){
+    Vector2 GetDirection(float horizAxis) {
         Vector2 direction = new Vector2();
 
-        if (horizAxis > 0){
+        if (horizAxis > 0) {
             direction = Vector2.right;
             transform.localScale = new Vector3(4, 4, 4);
         }
-            
-        else if (horizAxis < 0){
+
+        else if (horizAxis < 0) {
             direction = Vector2.left;
             transform.localScale = new Vector3(-4, 4, 4);
         }
-            
+
         /*
         else if (vertAxis > 0)
             direction = Vector2.up;
@@ -103,32 +105,32 @@ public class player1Controller : MonoBehaviour {
         return direction;
     }
 
-    void FillGun(){
+    void FillGun() {
         gunQueue = new Queue<GameObject>();
         GameObject bulletInstance;
-        for (int i = 0; i < queueGunAmmo; i++){
+        for (int i = 0; i < queueGunAmmo; i++) {
             bulletInstance = Instantiate(bullet);
             bulletInstance.SetActive(false);
             gunQueue.Enqueue(bulletInstance);
         }
     }
 
-    public void LowerEnergy(){
+    public void LowerEnergy() {
         energy -= energydecrement;
     }
 
-    public void IncrementEnergyDecrement(){
+    public void IncrementEnergyDecrement() {
         energydecrement += energyDecrementConstant;
     }
 
-    public void IncrementEnergy(){
+    public void IncrementEnergy() {
         if ((energy + energyIncrementConstant) >= maxEnergy)
             energy = maxEnergy;
-        else 
+        else
             energy += energyIncrementConstant;
     }
 
-    void ShootBullet(){
+    void ShootBullet() {
         //initialGunAmmo--;
         GameObject bulletInstance = gunQueue.Dequeue();
         bulletController controller = bulletInstance.GetComponent<bulletController>();
@@ -141,17 +143,30 @@ public class player1Controller : MonoBehaviour {
         controller.bulletLife = bulletLife;
     }
 
-    public void StoreBullet(GameObject bulletInstance){
+    public void StoreBullet(GameObject bulletInstance) {
         bulletInstance.SetActive(false);
         gunQueue.Enqueue(bulletInstance);
     }
 
-    void Dash(){
-        if (dashEnergyLoss <= energy && Input.GetKeyDown(KeyCode.RightShift)){
+    void Dash() {
+        if (dashEnergyLoss <= energy && Input.GetKeyDown(KeyCode.RightShift)) {
             energy -= dashEnergyLoss;
             isDashing = true;
         } else {
             isDashing = false;
         }
+    }
+
+    public Tilemap tilemap;
+
+    void getTile()
+    {
+        Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
+        if (tilemap.GetTile(cellPosition).name == "water2")
+        {
+            currentSpeed = playerSpeed / 3;
+        }
+        else
+            currentSpeed = playerSpeed;
     }
 }

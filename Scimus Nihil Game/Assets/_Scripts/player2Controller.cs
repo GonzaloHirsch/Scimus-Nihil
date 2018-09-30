@@ -31,12 +31,8 @@ public class player2Controller : MonoBehaviour
 
     private void Update()
     {
-        fadeIn(blackScreenRenderer, FadeOutSpeed);
+        //fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
-        /*fadeOut(HotColdSprites[0], 0.75f);
-        fadeOut(HotColdSprites[1], 0.75f);
-        fadeOut(HotColdSprites[2], 0.75f);*/
-        //print(p1c.energy);
     }
 
     int count = 0;
@@ -96,13 +92,6 @@ public class player2Controller : MonoBehaviour
     char getRandomChar()
     {
         return charAllowed[Random.Range(0, charAllowed.Length)];
-    }
-
-    void fadeOut(RawImage renderer, float speed)
-    {
-        Color color = renderer.color;
-        color.a -= 5 * Time.deltaTime;
-        renderer.color = color;
     }
 
     void fadeIn(SpriteRenderer renderer, float speed)
