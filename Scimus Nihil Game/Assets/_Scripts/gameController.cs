@@ -30,17 +30,31 @@ public class gameController : MonoBehaviour {
 	
 	void Update () {
         PlayGame();
+        if (!player1.isAlive){
+            PlayerDeath();
+            Credits();
+        }
 	}
 
     void MainMenu(){
+        //TODO activar la imagen del menu
+        while(!Input.GetKeyDown(KeyCode.KeypadEnter)){}
+        //TODO desactivar la imagen del menu
         player1.isAlive = true;
+        player1.playerAnimator.SetTrigger("PlayerWakeUp");
     }
 
     void Credits(){
+        player1.playerAnimator.SetTrigger("PlayerRemainDead");
+        //TODO mostrar creditos
+    }
 
+    void PlayerDeath(){
+        player1.playerAnimator.SetTrigger("PlayerDie");
     }
 
     void PlayGame(){
+        player1.playerAnimator.SetTrigger("PlayerRun");
         totalTime += Time.deltaTime;
         for (int i = 0; i < spawners.Length; i++)
             spawners[i].GetComponent<spawnerController>().waitTimeTotal = SpawnFunction(totalTime);

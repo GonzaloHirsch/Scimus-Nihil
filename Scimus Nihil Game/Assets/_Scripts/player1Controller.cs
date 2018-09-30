@@ -26,11 +26,12 @@ public class player1Controller : MonoBehaviour {
     public bool isDashing = false;
     [HideInInspector]
     public Rigidbody2D playerRB;
+    [HideInInspector]
+    public Animator playerAnimator;
 
     private float energydecrement = 0.1f;
     private Vector2 moveDirection;
     private Vector2 bulletDirection;
-
     private Queue<GameObject> gunQueue;
     //private int gunAmmo;
     private readonly float EPSILON = 0.000000000001f;
@@ -43,6 +44,7 @@ public class player1Controller : MonoBehaviour {
         //gunAmmo = initialGunAmmo;
         currentSpeed = playerSpeed;
         FillGun();
+        playerAnimator = GetComponent<Animator>();
 	}
 
     private void Update()
@@ -81,10 +83,16 @@ public class player1Controller : MonoBehaviour {
     Vector2 GetDirection(float horizAxis){
         Vector2 direction = new Vector2();
 
-        if (horizAxis > 0)
+        if (horizAxis > 0){
             direction = Vector2.right;
-        else if (horizAxis < 0)
+            transform.localScale = new Vector3(4, 4, 4);
+        }
+            
+        else if (horizAxis < 0){
             direction = Vector2.left;
+            transform.localScale = new Vector3(-4, 4, 4);
+        }
+            
         /*
         else if (vertAxis > 0)
             direction = Vector2.up;
