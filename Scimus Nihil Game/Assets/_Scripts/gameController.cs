@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class gameController : MonoBehaviour {
 
@@ -11,6 +12,11 @@ public class gameController : MonoBehaviour {
     public GameObject clouds;
     public player1Controller player1;
     public player2Controller player2;
+
+    public AudioSource endAudio;
+    public AudioSource menuAudio;
+    public AudioSource startAudio;
+    public AudioSource gameAudio;
 
     public delegate void PlayerDies();
     public static event PlayerDies OnPlayerDeath;
@@ -52,6 +58,7 @@ public class gameController : MonoBehaviour {
                 if (t >= 1f)
                 {
                     OnPlayerDeath();
+
                     isEnding = false;
                 }
             }
@@ -61,11 +68,15 @@ public class gameController : MonoBehaviour {
     void ActivateMainMenu(){
         player2.enabled = false;
         clouds.SetActive(false);
+        menuAudio.Play();
         //TODO activar la imagen del menu
     }
 
     void DeactivateMainMenu(){
         if(Input.GetKeyDown(KeyCode.Return) && !playingGame){
+            menuAudio.DOFade(0, 2);
+            startAudio.Play();
+            startAudio.DOFade(1, 2);
             clouds.SetActive(true);
             player2.enabled = true;
             player1.isAlive = true;
@@ -86,6 +97,9 @@ public class gameController : MonoBehaviour {
         player1.playerAnimator.SetTrigger("PlayerDie");
         DeactivateSpawners();
         player2.enabled = false;
+        startAudio.DOFade(0, 0.5f);
+        endAudio.Play();
+        endAudio.DOFade(1, 0.5f);
     }
 
     void PlayGame(){

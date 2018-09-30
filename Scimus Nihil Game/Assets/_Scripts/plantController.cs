@@ -101,7 +101,7 @@ public class plantController : MonoBehaviour {
             GameObject child = new GameObject();
             child.transform.parent = transform;
             child.transform.localPosition = new Vector3(0, 0, 0);
-            child.transform.localScale *= 2;
+            child.transform.localScale *= 2.5f;
             child.AddComponent<SpriteRenderer>().sprite = walkingCivil[Random.Range(0, walkingCivil.Length)];
             child.GetComponent<SpriteRenderer>().sortingOrder = 2;
         }
