@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -438,6 +439,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbba1d08f7653420ea41632200d180ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &627083457 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1946568106683484, guid: b0559eaa04bde4933a22c352cf593ee3,
@@ -689,7 +701,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999046987}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
   m_Name: 
@@ -828,14 +840,15 @@ MonoBehaviour:
   bulletLife: 1.5
   bulletSpeed: 2
   isAlive: 0
-  plantCountDeath: 20
+  plantCountDeath: 25
   nearCount: 0
   score: 0
-  energy: 30
+  energy: 10000
   maxEnergy: 60
   energyDecrementConstant: 0.5
   energyIncrementConstant: 1
   dashEnergyLoss: 15
+  isDashing: 0
 --- !u!50 &999046993
 Rigidbody2D:
   serializedVersion: 4

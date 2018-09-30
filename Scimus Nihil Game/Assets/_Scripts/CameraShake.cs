@@ -4,41 +4,18 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour {
 
-    public Transform camTransform;
+    private player1Controller playerController;
 
-    public float shakeDuration = 1f;
-    public float shakeDivision = 20f;
-    public float shakeAmount = 0f;
-    public float decreaseFactor = 1.0f;
-    
-    Vector3 originalPos;
-
-    void Awake()
-    {
-        if (camTransform == null)
-        {
-            camTransform = GetComponent(typeof(Transform)) as Transform;
-        }
+    private void Start(){
+        playerController = GameObject.FindWithTag("Player").GetComponent<player1Controller>();
     }
 
-    public void OnEnable()
-    {
-        originalPos = camTransform.localPosition;
+    private void Update(){
+        Shake();
     }
 
-    void Update()
-    {
-        shakeAmount = ((float)GameObject.FindGameObjectWithTag("Player").GetComponent<player1Controller>().nearCount) /*/ shakeDivision*/;
-        if (shakeDuration > 0)
-        {
-            camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
-            
-            shakeDuration -= Time.deltaTime * decreaseFactor;
-        }
-        else
-        {
-            shakeDuration = 1f;
-            camTransform.localPosition = originalPos;
-        }
+    void Shake(){
+        transform.position += (Random.insideUnitSphere * playerController.nearCount);
     }
+
 }
