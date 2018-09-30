@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 public class player1Controller : MonoBehaviour {
 
@@ -35,7 +36,8 @@ public class player1Controller : MonoBehaviour {
     public GameObject whiteScreen;
     public GameObject blackScreen;
     public ParticleSystem[] splashShot;
-    public RawImage barritaAzul;
+    public GameObject barritaAzul;
+    public TextMeshProUGUI scoreText;
 
     private float energydecrement = 0.1f;
     private Vector2 moveDirection;
@@ -76,7 +78,7 @@ public class player1Controller : MonoBehaviour {
                 GetComponent<Collider2D>().enabled = false;
                 clouds.SetActive(false);
             }
-            updateEnergyBar();
+            UpdateUI();
             getTile();
         }
     }
@@ -169,7 +171,12 @@ public class player1Controller : MonoBehaviour {
         if (dashEnergyLoss <= energy && Input.GetKeyDown(KeyCode.RightShift)) {
             energy -= dashEnergyLoss;
             isDashing = true;
-        } else {
+        } else if (dashEnergyLoss > energy && Input.GetKeyDown(KeyCode.RightShift)) {
+            isDashing = false;
+            barritaAzul.GetComponent<RectTransform>().DOShakePosition(0.5f, 15f, 25,90,false,false);
+            print("ASDASD");
+        } else
+        {
             isDashing = false;
         }
     }
@@ -203,10 +210,12 @@ public class player1Controller : MonoBehaviour {
                 });
     }
 
-    void updateEnergyBar()
+    void UpdateUI()
     {
-        Rect rect = barritaAzul.uvRect;
-        rect.x = Mathf.Lerp(0, 1, energy / maxEnergy);
-        barritaAzul.uvRect = rect;
+        Rect rect = barritaAzul.GetComponent<RawImage>().uvRect;
+        rect.x = Mathf.Lerp(1, 0, energy / maxEnergy);
+        barritaAzul.GetComponent<RawImage>().uvRect = rect;
+
+        scoreText.SetText("Score: " + score);
     }
 }

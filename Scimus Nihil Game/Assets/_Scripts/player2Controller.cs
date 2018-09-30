@@ -17,7 +17,8 @@ public class player2Controller : MonoBehaviour
 
     public GameObject BlackScreen;
     SpriteRenderer blackScreenRenderer;
-    public float FadeOutSpeed = 5f;
+    
+    float FadeOutSpeed = 4f;
 
     player1Controller p1c;
 
@@ -54,6 +55,7 @@ public class player2Controller : MonoBehaviour
                     ShowSprite(HotColdSprites[3], 1);
                     HotColdSprites[3].DOFade(0, 1);
                     p1c.IncrementEnergyDecrement();
+                    FadeOutSpeed += 0.25f;
                 }
                 else
                 {
