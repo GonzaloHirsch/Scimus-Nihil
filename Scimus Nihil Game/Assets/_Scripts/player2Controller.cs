@@ -32,8 +32,10 @@ public class player2Controller : MonoBehaviour
         fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
         fadeOut(ProxText, 0.75f);
-        print(p1c.energy);
+        //print(p1c.energy);
     }
+
+    int count = 0;
 
     void checkKeyDown()
     {
@@ -45,6 +47,8 @@ public class player2Controller : MonoBehaviour
                 {
                     charFound();
                     currentChar = getRandomChar();
+                    print(count);
+                    count = 0;
                     //p1c.IncrementEnergyDecrement();
                 }
                 else
@@ -71,6 +75,7 @@ public class player2Controller : MonoBehaviour
                     ShowSprite(ProxText, p1c.energy / 30);
                     p1c.LowerEnergy();
                     proxSound.Play();
+                    count++;
                 }
             }
         }
