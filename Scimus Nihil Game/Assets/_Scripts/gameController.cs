@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
+using Cinemachine;
 
 public class gameController : MonoBehaviour {
 
@@ -16,6 +18,8 @@ public class gameController : MonoBehaviour {
     public Image creditsBG;
     public Image titleScreen;
     public Image credits;
+    public CinemachineVirtualCamera virtualCam;
+   
 
     public AudioSource endAudio;
     public AudioSource menuAudio;
@@ -45,7 +49,7 @@ public class gameController : MonoBehaviour {
         ActivateMainMenu();
     }
 
-    public float t = 0;
+    float t = 0;
     bool isEnding = false;
 
 	void Update () {
@@ -58,7 +62,7 @@ public class gameController : MonoBehaviour {
                 isEnding = true;
             }
         } else if (!playingGame){
-            
+
             if (isEnding)
             {
                 t += Time.deltaTime;
@@ -71,7 +75,11 @@ public class gameController : MonoBehaviour {
                     Credits();
                 }
             }
+            else if (Input.GetKeyDown(KeyCode.Delete)) {
+                Application.Quit();
+            }
         }
+
 	}
 
     void ActivateMainMenu(){
@@ -97,19 +105,36 @@ public class gameController : MonoBehaviour {
 
             player1.playerAnimator.SetTrigger("PlayerWakeUp");
             player1.playerAnimator.SetTrigger("PlayerRun");
-            ActivateSpawners();
+            
         }
     }
 
-    void Credits(){
-        creditsBG.DOFade(1f, 10f);
+    public void PlayerExitsArea()
+    {
+        startAudio.DOFade(0, 2f);
+        gameAudio.Play();
+        gameAudio.DOFade(1, 2f);
+        ActivateSpawners();
     }
 
+    void Credits(){
+        credits.enabled = true;
+        creditsBG.enabled = true;
+        creditsBG.DOFade(1f, 20f);
+        credits.DOFade(1f, 20f);
+        var pixCam = Camera.main.GetComponent<PixelPerfectCamera>();
+        DOTween.To(
+            getter: () => { return pixCam.assetsPPU; },
+            setter: (int value) => { pixCam.assetsPPU = value; },
+            endValue: 5,
+            duration: 15f);
+    }
+    
     void PlayerDeath(){
         player1.playerAnimator.SetTrigger("PlayerDie");
         DeactivateSpawners();
         player2.enabled = false;
-        startAudio.DOFade(0, 0.5f);
+        gameAudio.DOFade(0, 0.5f);
         endAudio.Play();
         endAudio.DOFade(1, 0.5f);
     }

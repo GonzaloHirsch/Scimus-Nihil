@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class player1Controller : MonoBehaviour {
 
@@ -30,6 +32,10 @@ public class player1Controller : MonoBehaviour {
     [HideInInspector]
     public Animator playerAnimator;
     public GameObject clouds;
+    public GameObject whiteScreen;
+    public GameObject blackScreen;
+    public ParticleSystem[] splashShot;
+    public RawImage barritaAzul;
 
     private float energydecrement = 0.1f;
     private Vector2 moveDirection;
@@ -64,11 +70,13 @@ public class player1Controller : MonoBehaviour {
             Shoot();
             if (nearCount >= plantCountDeath)
             {
+                blackScreen.SetActive(false);
+                Lightning();
                 isAlive = false;
                 GetComponent<Collider2D>().enabled = false;
                 clouds.SetActive(false);
             }
-
+            updateEnergyBar();
             getTile();
         }
     }
@@ -171,11 +179,34 @@ public class player1Controller : MonoBehaviour {
     void getTile()
     {
         Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
-        if (cellPosition != null && tilemap.GetTile(cellPosition).name == "water2")
+        var tile = tilemap.GetTile(cellPosition);
+        
+        if (tile != null && tile.name == "agua")
         {
             currentSpeed = playerSpeed / 3;
         }
         else
             currentSpeed = playerSpeed;
+    }
+
+    void Lightning() {
+        SpriteRenderer sr = whiteScreen.GetComponent<SpriteRenderer>();
+        sr.DOFade(1, 0.2f).OnComplete(
+            () =>
+            {
+                sr.DOFade(0, 0.2f).OnComplete(
+            () =>
+            {
+                sr.DOFade(1, 0.2f).OnComplete(
+                    () => sr.DOFade(0, 0.2f));
+            });
+                });
+    }
+
+    void updateEnergyBar()
+    {
+        Rect rect = barritaAzul.uvRect;
+        rect.x = Mathf.Lerp(0, 1, energy / maxEnergy);
+        barritaAzul.uvRect = rect;
     }
 }

@@ -95,7 +95,6 @@ public class plantController : MonoBehaviour {
     {
         if (isAlive)
         {
-            print("fuck you");
             isAlive = false;
             Destroy(GetComponent<SpriteRenderer>());
             GameObject child = new GameObject();

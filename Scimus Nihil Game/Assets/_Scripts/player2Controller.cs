@@ -31,7 +31,7 @@ public class player2Controller : MonoBehaviour
 
     private void Update()
     {
-        //fadeIn(blackScreenRenderer, FadeOutSpeed);
+        fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
     }
 
@@ -53,7 +53,7 @@ public class player2Controller : MonoBehaviour
                     currentChar = getRandomChar();
                     ShowSprite(HotColdSprites[3], 1);
                     HotColdSprites[3].DOFade(0, 1);
-                    //p1c.IncrementEnergyDecrement();
+                    p1c.IncrementEnergyDecrement();
                 }
                 else
                 {
@@ -69,7 +69,6 @@ public class player2Controller : MonoBehaviour
                     else if (d < 3)
                     {
                         HotColdSprites[1].DOKill();
-                        print("Da fuk");
                         ShowSprite(HotColdSprites[1], 1);
                         HotColdSprites[1].DOFade(0, 1);
                         proxSound.pitch = 2;
