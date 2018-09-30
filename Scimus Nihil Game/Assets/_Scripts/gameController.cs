@@ -89,7 +89,9 @@ public class gameController : MonoBehaviour {
             clouds.SetActive(true);
 
             menuAudio.DOFade(0, 2);
+
             titleScreen.DOFade(0.0f, 1.5f);
+
             startAudio.Play();
             startAudio.DOFade(1, 2);
 
@@ -101,7 +103,6 @@ public class gameController : MonoBehaviour {
 
     void Credits(){
         creditsBG.DOFade(1f, 10f);
-
     }
 
     void PlayerDeath(){
