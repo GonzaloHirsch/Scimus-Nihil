@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198065479005695672}
   - component: {fileID: 199678269267734866}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: shot-flowers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
