@@ -9,11 +9,10 @@ public class gameController : MonoBehaviour {
     public float plantSpawnTime;
     public GameObject[] spawners;
     public GameObject clouds;
+    public player1Controller player1;
+    public player2Controller player2;
 
     private float totalTime = 0f;
-    private player1Controller player1;
-    private player2Controller player2;
-    private GameObject screenRenderer;
     private bool playingGame = false;
 
     private void Awake()
@@ -24,10 +23,6 @@ public class gameController : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-
-        player1 = GameObject.FindWithTag("Player").GetComponent<player1Controller>();
-        player2 = GameObject.FindWithTag("Player").GetComponent<player2Controller>();
-        screenRenderer = GameObject.FindWithTag("ProximityText");
     }
 
     void Start () {
@@ -48,7 +43,6 @@ public class gameController : MonoBehaviour {
 	}
 
     void ActivateMainMenu(){
-        screenRenderer.SetActive(false);
         player2.enabled = false;
         clouds.SetActive(false);
         //TODO activar la imagen del menu
@@ -56,8 +50,7 @@ public class gameController : MonoBehaviour {
 
     void DeactivateMainMenu(){
         if(Input.GetKeyDown(KeyCode.Return) && !playingGame){
-            clouds.SetActive(false);
-            screenRenderer.SetActive(true);
+            clouds.SetActive(true);
             player2.enabled = true;
             player1.isAlive = true;
             playingGame = true;
@@ -70,7 +63,6 @@ public class gameController : MonoBehaviour {
     }
 
     void Credits(){
-        player1.playerAnimator.SetTrigger("PlayerRemainDead");
         //TODO mostrar creditos
     }
 
