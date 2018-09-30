@@ -25,8 +25,9 @@ public class gameController : MonoBehaviour {
     }
 
     void Start () {
-        MainMenu();
-	}
+        //MainMenu();
+        player1.isAlive = true;
+    }
 	
 	void Update () {
         PlayGame();
