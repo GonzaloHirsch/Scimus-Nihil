@@ -94,9 +94,13 @@ public class plantController : MonoBehaviour {
     public void onPlayerDeath()
     {
         if (isAlive)
-            GetComponent<SpriteRenderer>().sprite = walkingCivil[Random.Range(0, walkingCivil.Length - 1)];
+        {
+            print("fuck you");
+            isAlive = false;
+            GetComponent<SpriteRenderer>().sprite = deadCivil[Random.Range(0, deadCivil.Length - 1)];//walkingCivil[Random.Range(0, walkingCivil.Length - 1)];
+        }
         else
-            GetComponent<SpriteRenderer>().sprite = deadCivil[Random.Range(0, deadCivil.Length - 1)];
+            GetComponent<SpriteRenderer>().sprite = walkingCivil[Random.Range(0, walkingCivil.Length - 1)];
     }
 
     void DeactivateColliderAndRb(){
@@ -115,9 +119,7 @@ public class plantController : MonoBehaviour {
     }
 
     void SetSprites(int spriteNumber){
-        plantAnimator.SetBool("Entry", true);
         if (spriteNumber == 1){
-            plantAnimator.SetBool("Entry", false);
             plantAnimator.SetBool("Plant2", true);
         }
     }
@@ -149,7 +151,7 @@ public class plantController : MonoBehaviour {
         previousAngle = angle;
         versorDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         versorDirection = versorDirection / versorDirection.magnitude;
-        SetSprites(spriteIndex);
+        //SetSprites(spriteIndex);
     }
 
     float GetNewAngle(){

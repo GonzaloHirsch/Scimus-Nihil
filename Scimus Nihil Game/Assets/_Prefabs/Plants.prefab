@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267504061578324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -69.41955, y: -32.907524, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,6 +114,14 @@ MonoBehaviour:
   deadSprites:
   - {fileID: 21300000, guid: 4bea524c358df434ca50833620ddcbcf, type: 3}
   - {fileID: 21300000, guid: ab13f183d9f4a41308232ccc9de09d20, type: 3}
+  deadCivil:
+  - {fileID: 21300000, guid: 0b27342bf4ea0488ca2271b1c97ae68f, type: 3}
+  - {fileID: 21300000, guid: aff6a78c49a8b48929014de198ae4a11, type: 3}
+  - {fileID: 21300000, guid: 43335cea5c2ed423cbcdf3539e9d5803, type: 3}
+  walkingCivil:
+  - {fileID: 21300000, guid: 3ab884d7f558a405388edefc7eb3e389, type: 3}
+  - {fileID: 21300000, guid: aef153ecd5d034dfe9fdd5e4200b30e7, type: 3}
+  - {fileID: 21300000, guid: 743327d647f164b469180e718efe349a, type: 3}
   spriteIndex: 0
   probabilityOfFollowing: 75
   plantFollowSpeed: 2

@@ -42,13 +42,18 @@ public class gameController : MonoBehaviour {
             if (!player1.isAlive){
                 playingGame = false;
                 PlayerDeath();
+                isEnding = true;
             }
         } else if (!playingGame){
-            t += Time.deltaTime;
-            if (t >= 1 && !isEnding)
+            
+            if (isEnding)
             {
-                OnPlayerDeath();
-                isEnding = true;
+                t += Time.deltaTime;
+                if (t >= 1f)
+                {
+                    OnPlayerDeath();
+                    isEnding = false;
+                }
             }
         }
 	}

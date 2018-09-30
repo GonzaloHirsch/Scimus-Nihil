@@ -51,7 +51,10 @@ public class player1Controller : MonoBehaviour {
     private void Update()
     {
         if (isAlive)
+        {
             Dash();
+            
+        }
     }
 
     void FixedUpdate() {
@@ -59,7 +62,11 @@ public class player1Controller : MonoBehaviour {
             Walk();
             Shoot();
             if (nearCount >= plantCountDeath)
+            {
                 isAlive = false;
+                GetComponent<Collider2D>().enabled = false;
+            }
+
             getTile();
         }
     }
@@ -162,7 +169,7 @@ public class player1Controller : MonoBehaviour {
     void getTile()
     {
         Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
-        if (tilemap.GetTile(cellPosition).name == "water2")
+        if (cellPosition != null && tilemap.GetTile(cellPosition).name == "water2")
         {
             currentSpeed = playerSpeed / 3;
         }
