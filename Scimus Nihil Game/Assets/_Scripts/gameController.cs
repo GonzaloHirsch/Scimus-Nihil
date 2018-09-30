@@ -12,6 +12,9 @@ public class gameController : MonoBehaviour {
     public player1Controller player1;
     public player2Controller player2;
 
+    public delegate void PlayerDies();
+    public static event PlayerDies OnPlayerDeath;
+
     private float totalTime = 0f;
     private bool playingGame = false;
 
@@ -28,7 +31,10 @@ public class gameController : MonoBehaviour {
     void Start () {
         ActivateMainMenu();
     }
-	
+
+    public float t = 0;
+    bool isEnding = false;
+
 	void Update () {
         DeactivateMainMenu();
         if (playingGame){
@@ -38,7 +44,12 @@ public class gameController : MonoBehaviour {
                 PlayerDeath();
             }
         } else if (!playingGame){
-            Credits();
+            t += Time.deltaTime;
+            if (t >= 1 && !isEnding)
+            {
+                OnPlayerDeath();
+                isEnding = true;
+            }
         }
 	}
 

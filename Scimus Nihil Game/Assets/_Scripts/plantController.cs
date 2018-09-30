@@ -6,6 +6,8 @@ public class plantController : MonoBehaviour {
 
     public Sprite[] walkingSprites;
     public Sprite[] deadSprites;
+    public Sprite[] deadCivil;
+    public Sprite[] walkingCivil;
     [HideInInspector]
     public int spriteIndex;
     [Range(0, 100)]
@@ -29,6 +31,8 @@ public class plantController : MonoBehaviour {
     private float distance;
     private bool isInRange = false;
 
+
+
 	void Start () {
         spritesSize = walkingSprites.Length;
         plantRenderer = GetComponent<SpriteRenderer>();
@@ -38,6 +42,8 @@ public class plantController : MonoBehaviour {
         setState();
 
         player = GameObject.FindGameObjectWithTag("Player");
+
+        gameController.OnPlayerDeath += onPlayerDeath;
 	}
 	
 	void FixedUpdate () {
@@ -82,6 +88,14 @@ public class plantController : MonoBehaviour {
             isInRange = false;
         }
 	}
+
+    public void onPlayerDeath()
+    {
+        if (isAlive)
+            GetComponent<SpriteRenderer>().sprite = walkingCivil[Random.Range(0, walkingCivil.Length - 1)];
+        else
+            GetComponent<SpriteRenderer>().sprite = deadCivil[Random.Range(0, deadCivil.Length - 1)];
+    }
 
     void DeactivateColliderAndRb(){
         Destroy(GetComponent<Collider2D>());
