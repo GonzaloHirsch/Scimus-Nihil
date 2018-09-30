@@ -7,12 +7,15 @@ public class spawnerController : MonoBehaviour {
     public GameObject plant;
     [HideInInspector]
     public float waitTimeTotal = 8f;
+    [HideInInspector]
+    public bool isActive = false;
 
     private float waitTime = 0f;
 
 	void Update () {
         waitTime += Time.deltaTime;
-        SpawnPlants();
+        if (isActive)
+            SpawnPlants();
 	}
 
     public void SpawnPlants(){

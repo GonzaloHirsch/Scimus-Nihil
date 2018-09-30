@@ -8,9 +8,13 @@ public class gameController : MonoBehaviour {
     [HideInInspector]
     public float plantSpawnTime;
     public GameObject[] spawners;
+    public GameObject clouds;
 
     private float totalTime = 0f;
     private player1Controller player1;
+    private player2Controller player2;
+    private GameObject screenRenderer;
+    private bool playingGame = false;
 
     private void Awake()
     {
@@ -22,27 +26,47 @@ public class gameController : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         player1 = GameObject.FindWithTag("Player").GetComponent<player1Controller>();
+        player2 = GameObject.FindWithTag("Player").GetComponent<player2Controller>();
+        screenRenderer = GameObject.FindWithTag("ProximityText");
     }
 
     void Start () {
-        //MainMenu();
-        player1.isAlive = true;
+        ActivateMainMenu();
     }
 	
 	void Update () {
-        PlayGame();
-        if (!player1.isAlive){
-            PlayerDeath();
+        DeactivateMainMenu();
+        if (playingGame){
+            PlayGame();
+            if (!player1.isAlive){
+                playingGame = false;
+                PlayerDeath();
+            }
+        } else if (!playingGame){
             Credits();
         }
 	}
 
-    void MainMenu(){
+    void ActivateMainMenu(){
+        screenRenderer.SetActive(false);
+        player2.enabled = false;
+        clouds.SetActive(false);
         //TODO activar la imagen del menu
-        while(!Input.GetKeyDown(KeyCode.KeypadEnter)){}
-        //TODO desactivar la imagen del menu
-        player1.isAlive = true;
-        player1.playerAnimator.SetTrigger("PlayerWakeUp");
+    }
+
+    void DeactivateMainMenu(){
+        if(Input.GetKeyDown(KeyCode.Return) && !playingGame){
+            clouds.SetActive(false);
+            screenRenderer.SetActive(true);
+            player2.enabled = true;
+            player1.isAlive = true;
+            playingGame = true;
+            //TODO desactivar la imagen del menu
+            player1.isAlive = true;
+            player1.playerAnimator.SetTrigger("PlayerWakeUp");
+            player1.playerAnimator.SetTrigger("PlayerRun");
+            ActivateSpawners();
+        }
     }
 
     void Credits(){
@@ -52,10 +76,10 @@ public class gameController : MonoBehaviour {
 
     void PlayerDeath(){
         player1.playerAnimator.SetTrigger("PlayerDie");
+        player2.enabled = false;
     }
 
     void PlayGame(){
-        player1.playerAnimator.SetTrigger("PlayerRun");
         totalTime += Time.deltaTime;
         for (int i = 0; i < spawners.Length; i++)
             spawners[i].GetComponent<spawnerController>().waitTimeTotal = SpawnFunction(totalTime);
@@ -63,5 +87,10 @@ public class gameController : MonoBehaviour {
 
     int SpawnFunction(float time){
         return (int)(40 / (time + 5));
+    }
+
+    void ActivateSpawners(){
+        for (int i = 0; i < spawners.Length; i++)
+            spawners[i].GetComponent<spawnerController>().isActive = true;;
     }
 }
