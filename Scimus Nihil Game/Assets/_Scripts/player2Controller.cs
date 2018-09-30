@@ -18,7 +18,7 @@ public class player2Controller : MonoBehaviour
     public GameObject BlackScreen;
     SpriteRenderer blackScreenRenderer;
     
-    float FadeOutSpeed = 4f;
+    float FadeOutSpeed = 0.05f;
 
     player1Controller p1c;
 
@@ -55,38 +55,41 @@ public class player2Controller : MonoBehaviour
                     ShowSprite(HotColdSprites[3], 1);
                     HotColdSprites[3].DOFade(0, 1);
                     p1c.IncrementEnergyDecrement();
-                    FadeOutSpeed += 0.25f;
+                    FadeOutSpeed += 0.005f;
                 }
                 else
                 {
-                    float d = Vector2.Distance(keysMap[c], keysMap[currentChar]);
-                    if (d < 2)
+                    if (p1c.energy > 0)
                     {
-                        HotColdSprites[0].DOKill();
-                        ShowSprite(HotColdSprites[0], 1);
-                        HotColdSprites[0].DOFade(0, 1);
-                        proxSound.pitch = 3;
-                        proxSound.volume = 1;
-                    }
-                    else if (d < 3)
-                    {
-                        HotColdSprites[1].DOKill();
-                        ShowSprite(HotColdSprites[1], 1);
-                        HotColdSprites[1].DOFade(0, 1);
-                        proxSound.pitch = 2;
-                        proxSound.volume = 0.5f;
-                    }
-                    else
-                    {
-                        HotColdSprites[2].DOKill();
-                        ShowSprite(HotColdSprites[2], 1);
-                        HotColdSprites[2].DOFade(0, 1);
-                        proxSound.pitch = 1;
-                        proxSound.volume = 0.2f;
-                    }
+                        float d = Vector2.Distance(keysMap[c], keysMap[currentChar]);
+                        if (d < 2)
+                        {
+                            HotColdSprites[0].DOKill();
+                            ShowSprite(HotColdSprites[0], 1);
+                            HotColdSprites[0].DOFade(0, 1);
+                            proxSound.pitch = 3;
+                            proxSound.volume = 1;
+                        }
+                        else if (d < 3)
+                        {
+                            HotColdSprites[1].DOKill();
+                            ShowSprite(HotColdSprites[1], 1);
+                            HotColdSprites[1].DOFade(0, 1);
+                            proxSound.pitch = 2;
+                            proxSound.volume = 0.5f;
+                        }
+                        else
+                        {
+                            HotColdSprites[2].DOKill();
+                            ShowSprite(HotColdSprites[2], 1);
+                            HotColdSprites[2].DOFade(0, 1);
+                            proxSound.pitch = 1;
+                            proxSound.volume = 0.2f;
+                        }
 
-                    p1c.LowerEnergy();
-                    proxSound.Play();
+                        p1c.LowerEnergy();
+                        proxSound.Play();
+                    }
                 }
             }
         }

@@ -215,7 +215,9 @@ public class player1Controller : MonoBehaviour {
         Rect rect = barritaAzul.GetComponent<RawImage>().uvRect;
         rect.x = Mathf.Lerp(1, 0, energy / maxEnergy);
         barritaAzul.GetComponent<RawImage>().uvRect = rect;
-
-        scoreText.SetText("Score: " + score);
+        if(isAlive)
+            scoreText.SetText("Plants Watered: " + score);
+        else
+            scoreText.SetText("Civilians Killed: " + score);
     }
 }

@@ -105,6 +105,8 @@ public class gameController : MonoBehaviour {
 
             player1.playerAnimator.SetTrigger("PlayerWakeUp");
             player1.playerAnimator.SetTrigger("PlayerRun");
+
+            Camera.main.GetComponent<CinemachineBrain>().enabled = true;
             
         }
     }
