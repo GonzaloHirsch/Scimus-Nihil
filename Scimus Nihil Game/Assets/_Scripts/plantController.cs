@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class plantController : MonoBehaviour {
 
-    public Sprite[] walkingSprites;
+    public Animation[] walkingSprites;
     public Sprite[] deadSprites;
     [HideInInspector]
     public int spriteIndex;
@@ -20,6 +20,7 @@ public class plantController : MonoBehaviour {
     public float explosionForce = 10f;
 
     private SpriteRenderer plantRenderer;
+    private Animator plantAnimator;
     private int spritesSize;
     private bool follows;
     private GameObject player;
@@ -31,6 +32,7 @@ public class plantController : MonoBehaviour {
 
 	void Start () {
         spritesSize = walkingSprites.Length;
+        plantAnimator = GetComponent<Animator>();
         plantRenderer = GetComponent<SpriteRenderer>();
         spriteIndex = (int)Random.Range(0, (float)spritesSize);
         SetSprites(spriteIndex);
@@ -99,7 +101,11 @@ public class plantController : MonoBehaviour {
     }
 
     void SetSprites(int spriteNumber){
-        plantRenderer.sprite = walkingSprites[spriteNumber];
+        plantAnimator.SetBool("Entry", true);
+        if (spriteNumber == 1){
+            plantAnimator.SetBool("Entry", false);
+            plantAnimator.SetBool("Plant2", true);
+        }
     }
 
     void setState(){
@@ -142,6 +148,7 @@ public class plantController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision){
         if (collision.gameObject.CompareTag("Bullet")){
+            plantAnimator.enabled = false;
             isAlive = false;
             player.GetComponent<player1Controller>().score++;
             player.GetComponent<player1Controller>().IncrementEnergy();
