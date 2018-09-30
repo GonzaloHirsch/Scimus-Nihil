@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player2Controller : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class player2Controller : MonoBehaviour
 
     public AudioSource proxSound;
 
-    public Sprite[] HotColdSprites;
+    public RawImage[] HotColdSprites;
     public SpriteRenderer ProxText;
 
     public GameObject BlackScreen;
@@ -31,7 +32,9 @@ public class player2Controller : MonoBehaviour
     {
         fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
-        fadeOut(ProxText, 0.75f);
+        fadeOut(HotColdSprites[0], 0.75f);
+        fadeOut(HotColdSprites[1], 0.75f);
+        fadeOut(HotColdSprites[2], 0.75f);
         //print(p1c.energy);
     }
 
@@ -56,23 +59,23 @@ public class player2Controller : MonoBehaviour
                     float d = Vector2.Distance(keysMap[c], keysMap[currentChar]);
                     if (d < 2)
                     {
-                        ProxText.sprite = HotColdSprites[3];
+                        ShowSprite(HotColdSprites[0], p1c.energy / 30);
                         proxSound.pitch = 3;
                         proxSound.volume = 1;
                     }
                     else if (d < 3)
                     {
-                        ProxText.sprite = HotColdSprites[2];
+                        ShowSprite(HotColdSprites[1], p1c.energy / 30);
                         proxSound.pitch = 2;
                         proxSound.volume = 0.5f;
                     }
                     else
                     {
-                        ProxText.sprite = HotColdSprites[1];
+                        ShowSprite(HotColdSprites[2], p1c.energy / 30);
                         proxSound.pitch = 1;
                         proxSound.volume = 0.2f;
                     }
-                    ShowSprite(ProxText, p1c.energy / 30);
+
                     p1c.LowerEnergy();
                     proxSound.Play();
                     count++;
@@ -91,10 +94,10 @@ public class player2Controller : MonoBehaviour
         return charAllowed[Random.Range(0, charAllowed.Length)];
     }
 
-    void fadeOut(SpriteRenderer renderer, float speed)
+    void fadeOut(RawImage renderer, float speed)
     {
         Color color = renderer.color;
-        color.a -= speed * Time.deltaTime;
+        color.a -= 200 * Time.deltaTime;
         renderer.color = color;
     }
 
@@ -113,7 +116,7 @@ public class player2Controller : MonoBehaviour
 
     }
 
-    void ShowSprite(SpriteRenderer renderer, float amount)
+    void ShowSprite(RawImage renderer, float amount)
     {
         Color color = renderer.color;
         color.a = amount;
