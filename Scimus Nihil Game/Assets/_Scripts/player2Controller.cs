@@ -8,6 +8,8 @@ public class player2Controller : MonoBehaviour
     char[] charAllowed = { 'q', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm' };
     char currentChar;
 
+    public AudioSource proxSound;
+
     public Sprite[] HotColdSprites;
     public SpriteRenderer ProxText;
 
@@ -27,10 +29,10 @@ public class player2Controller : MonoBehaviour
 
     private void Update()
     {
-        //fadeIn(blackScreenRenderer, FadeOutSpeed);
+        fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
         fadeOut(ProxText, 0.75f);
-        //print(p1c.energy);
+        print(p1c.energy);
     }
 
     void checkKeyDown()
@@ -43,24 +45,32 @@ public class player2Controller : MonoBehaviour
                 {
                     charFound();
                     currentChar = getRandomChar();
-                    p1c.IncrementEnergyDecrement();
-                } else
+                    //p1c.IncrementEnergyDecrement();
+                }
+                else
                 {
                     float d = Vector2.Distance(keysMap[c], keysMap[currentChar]);
                     if (d < 2)
                     {
                         ProxText.sprite = HotColdSprites[3];
+                        proxSound.pitch = 3;
+                        proxSound.volume = 1;
                     }
                     else if (d < 3)
                     {
                         ProxText.sprite = HotColdSprites[2];
+                        proxSound.pitch = 2;
+                        proxSound.volume = 0.5f;
                     }
                     else
                     {
                         ProxText.sprite = HotColdSprites[1];
+                        proxSound.pitch = 1;
+                        proxSound.volume = 0.2f;
                     }
-                    ShowSprite(ProxText, p1c.energy/30);
+                    ShowSprite(ProxText, p1c.energy / 30);
                     p1c.LowerEnergy();
+                    proxSound.Play();
                 }
             }
         }
