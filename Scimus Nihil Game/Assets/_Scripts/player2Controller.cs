@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class player2Controller : MonoBehaviour
 {
@@ -32,9 +33,9 @@ public class player2Controller : MonoBehaviour
     {
         fadeIn(blackScreenRenderer, FadeOutSpeed);
         checkKeyDown();
-        fadeOut(HotColdSprites[0], 0.75f);
+        /*fadeOut(HotColdSprites[0], 0.75f);
         fadeOut(HotColdSprites[1], 0.75f);
-        fadeOut(HotColdSprites[2], 0.75f);
+        fadeOut(HotColdSprites[2], 0.75f);*/
         //print(p1c.energy);
     }
 
@@ -59,19 +60,22 @@ public class player2Controller : MonoBehaviour
                     float d = Vector2.Distance(keysMap[c], keysMap[currentChar]);
                     if (d < 2)
                     {
-                        ShowSprite(HotColdSprites[0], p1c.energy / 30);
+                        ShowSprite(HotColdSprites[0], 1);
+                        HotColdSprites[0].DOFade(0.1f, 1);
                         proxSound.pitch = 3;
                         proxSound.volume = 1;
                     }
                     else if (d < 3)
                     {
-                        ShowSprite(HotColdSprites[1], p1c.energy / 30);
+                        ShowSprite(HotColdSprites[1], 1);
+                        HotColdSprites[1].DOFade(0, 1);
                         proxSound.pitch = 2;
                         proxSound.volume = 0.5f;
                     }
                     else
                     {
-                        ShowSprite(HotColdSprites[2], p1c.energy / 30);
+                        ShowSprite(HotColdSprites[2], 1);
+                        HotColdSprites[2].DOFade(0, 1);
                         proxSound.pitch = 1;
                         proxSound.volume = 0.2f;
                     }
@@ -97,7 +101,7 @@ public class player2Controller : MonoBehaviour
     void fadeOut(RawImage renderer, float speed)
     {
         Color color = renderer.color;
-        color.a -= 200 * Time.deltaTime;
+        color.a -= 5 * Time.deltaTime;
         renderer.color = color;
     }
 
