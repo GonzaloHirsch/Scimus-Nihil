@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
 
@@ -12,6 +13,9 @@ public class gameController : MonoBehaviour {
     public GameObject clouds;
     public player1Controller player1;
     public player2Controller player2;
+    public Image creditsBG;
+    public Image titleScreen;
+    public Image credits;
 
     public AudioSource endAudio;
     public AudioSource menuAudio;
@@ -32,6 +36,9 @@ public class gameController : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        credits.enabled = false;
+        creditsBG.enabled = false;
     }
 
     void Start () {
@@ -60,6 +67,8 @@ public class gameController : MonoBehaviour {
                     OnPlayerDeath();
 
                     isEnding = false;
+
+                    Credits();
                 }
             }
         }
@@ -69,20 +78,21 @@ public class gameController : MonoBehaviour {
         player2.enabled = false;
         clouds.SetActive(false);
         menuAudio.Play();
-        //TODO activar la imagen del menu
+        titleScreen.enabled = true;
     }
 
     void DeactivateMainMenu(){
         if(Input.GetKeyDown(KeyCode.Return) && !playingGame){
+            playingGame = true;
+            player1.isAlive = true;
+            player2.enabled = true;
+            clouds.SetActive(true);
+
             menuAudio.DOFade(0, 2);
+            titleScreen.DOFade(0.0f, 1.5f);
             startAudio.Play();
             startAudio.DOFade(1, 2);
-            clouds.SetActive(true);
-            player2.enabled = true;
-            player1.isAlive = true;
-            playingGame = true;
-            //TODO desactivar la imagen del menu
-            player1.isAlive = true;
+
             player1.playerAnimator.SetTrigger("PlayerWakeUp");
             player1.playerAnimator.SetTrigger("PlayerRun");
             ActivateSpawners();
@@ -90,7 +100,8 @@ public class gameController : MonoBehaviour {
     }
 
     void Credits(){
-        //TODO mostrar creditos
+        creditsBG.DOFade(1f, 10f);
+
     }
 
     void PlayerDeath(){
