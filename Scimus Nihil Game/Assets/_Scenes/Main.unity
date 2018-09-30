@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 42
+  m_AssetsPPU: 37
   m_RefResolutionX: 320
   m_RefResolutionY: 180
   m_UpscaleRT: 0
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 999046990}
   - component: {fileID: 999046989}
   - component: {fileID: 999046988}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999046987}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
   m_Name: 
@@ -709,7 +709,7 @@ MonoBehaviour:
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
     m_RawSignal: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
-    m_AmplitudeGain: 1
+    m_AmplitudeGain: 0.6
     m_FrequencyGain: 1
     m_RepeatMode: 0
     m_Randomize: 1
@@ -737,7 +737,7 @@ MonoBehaviour:
     m_DissipationDistance: 1000
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
   m_IgnoreTag: 
   m_UseImpactDirection: 0
   m_ScaleImpactWithMass: 0
@@ -814,6 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f6e652ee1ae4fd5b49e96b7a166939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  proxSound: {fileID: 0}
   HotColdSprites:
   - {fileID: 21300000, guid: abf86c69e3902ec4787a09e7ebb12bf5, type: 3}
   - {fileID: 21300000, guid: d54c0b85a205cad4bb0c32b99913ce16, type: 3}
@@ -849,6 +850,7 @@ MonoBehaviour:
   energyIncrementConstant: 1
   dashEnergyLoss: 15
   isDashing: 0
+  playerRB: {fileID: 0}
 --- !u!50 &999046993
 Rigidbody2D:
   serializedVersion: 4

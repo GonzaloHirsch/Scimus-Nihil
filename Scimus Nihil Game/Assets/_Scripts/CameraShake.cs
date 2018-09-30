@@ -15,7 +15,6 @@ public class CameraShake : MonoBehaviour {
     }
 
     void Shake(){
-        transform.position += (Random.insideUnitSphere * playerController.nearCount);
+        transform.position += (Random.insideUnitSphere * (playerController.nearCount / playerController.plantCountDeath));
     }
-
 }

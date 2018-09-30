@@ -24,11 +24,13 @@ public class player1Controller : MonoBehaviour {
     public float dashEnergyLoss = 15f;
     [HideInInspector]
     public bool isDashing = false;
+    [HideInInspector]
+    public Rigidbody2D playerRB;
 
     private float energydecrement = 0.1f;
     private Vector2 moveDirection;
     private Vector2 bulletDirection;
-    private Rigidbody2D playerRB;
+
     private Queue<GameObject> gunQueue;
     //private int gunAmmo;
     private readonly float EPSILON = 0.000000000001f;
